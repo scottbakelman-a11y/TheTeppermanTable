@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tepperman Table &amp; Co. | Bakery</title>
+<meta name="description" content="The Tepperman Table & Co. — a from-scratch bakery with Texas roots. Breads, pastries, kolaches, pies and custom orders.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F6F0E3; --cream-2:#EFE6D3; --paper:#FBF8F1;
+    --ink:#2A1C13; --ink-soft:#5B4A3D;
+    --gold:#A9823A; --gold-soft:#D9C49A;
+    --sage:#6F7D5C;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Karla', system-ui, sans-serif;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* eyebrow + ornaments */
+  .eyebrow{font-family:var(--sans);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .rule{display:flex;align-items:center;gap:14px;justify-content:center;color:var(--gold);margin:14px 0 18px}
+  .rule::before,.rule::after{content:"";height:1px;width:56px;background:var(--gold)}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;letter-spacing:.01em}
+  h2{font-size:clamp(2.1rem,4.4vw,3.1rem)}
+  h3{font-size:1.55rem}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:20;background:rgba(246,240,227,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--gold-soft)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:var(--serif);font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:.04em}
+  .brand span{color:var(--gold)}
+  .links{display:flex;gap:28px;list-style:none}
+  .links a{text-decoration:none;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+  .links a:hover{color:var(--gold)}
+  .menu-btn{display:none;background:none;border:0;font:inherit;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink);cursor:pointer}
+
+  /* hero */
+  .hero{padding:56px 0 80px;text-align:center;background:var(--cream)}
+  .hero img{width:min(460px,86vw);margin:0 auto;mix-blend-mode:multiply}
+  .hero p.lead{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.6vw,1.65rem);color:var(--ink-soft);max-width:620px;margin:8px auto 30px}
+  .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:14px 28px;border:1.5px solid var(--ink);text-decoration:none;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;transition:.2s}
+  .btn.solid{background:var(--ink);color:var(--cream)}
+  .btn.solid:hover{background:var(--gold);border-color:var(--gold)}
+  .btn:not(.solid):hover{background:var(--ink);color:var(--cream)}
+
+  section{padding:96px 0}
+  .center{text-align:center}
+
+  /* about */
+  .about{background:var(--paper);border-top:1px solid var(--gold-soft);border-bottom:1px solid var(--gold-soft)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .about p{color:var(--ink-soft);margin-bottom:16px}
+  .about blockquote{font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.25;font-style:italic;border-left:2px solid var(--gold);padding-left:28px}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;text-align:center}
+  .pillars div{padding:8px 12px}
+  .pillars strong{display:block;font-family:var(--serif);font-size:1.45rem;margin-bottom:4px}
+  .pillars span{color:var(--ink-soft);font-size:.95rem}
+  .star{color:var(--gold);font-size:1rem;display:block;margin-bottom:8px}
+
+  /* menu */
+  .menu-head{text-align:center;max-width:620px;margin:0 auto 56px}
+  .menu-head p{color:var(--ink-soft)}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px 72px}
+  .cat h3{border-bottom:1px solid var(--gold-soft);padding-bottom:10px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:baseline}
+  .cat h3 small{font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .item{display:grid;grid-template-columns:1fr auto;gap:2px 16px;margin-bottom:18px}
+  .item b{font-family:var(--serif);font-size:1.22rem;font-weight:600}
+  .item .price{font-family:var(--serif);font-size:1.15rem;color:var(--gold);font-weight:600}
+  .item p{grid-column:1/-1;font-size:.93rem;color:var(--ink-soft);line-height:1.5}
+  .tag{font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;background:var(--sage);color:#fff;padding:2px 7px;margin-left:8px;vertical-align:middle;font-weight:700}
+  .note{text-align:center;margin-top:40px;font-size:.9rem;color:var(--ink-soft);font-style:italic}
+
+  /* orders */
+  .orders{background:var(--ink);color:var(--cream)}
+  .orders .eyebrow{color:var(--gold-soft)}
+  .orders-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+  .card{border:1px solid rgba(217,196,154,.35);padding:36px 30px;text-align:center}
+  .card h3{margin-bottom:10px}
+  .card p{color:#D8CDB8;font-size:.95rem}
+  .orders .btn{border-color:var(--gold-soft);color:var(--cream)}
+  .orders .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+  .orders .lead2{max-width:620px;margin:0 auto;color:#D8CDB8}
+
+  /* visit */
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .panel{background:var(--paper);border:1px solid var(--gold-soft);padding:40px}
+  .hours{list-style:none;margin-top:14px}
+  .hours li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--gold-soft)}
+  .hours li:last-child{border:0}
+  .hours .closed{color:var(--ink-soft);font-style:italic}
+  .panel address{font-style:normal;margin:14px 0 22px;color:var(--ink-soft)}
+  .contact-line{margin-bottom:6px}
+  .contact-line a{color:var(--ink);text-decoration-color:var(--gold)}
+
+  footer{border-top:1px solid var(--gold-soft);padding:48px 0;text-align:center;color:var(--ink-soft);font-size:.88rem}
+  footer .tagline{font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin:10px 0 18px}
+  footer .tagline i{color:var(--gold);font-style:normal;margin:0 10px}
+  .social{display:flex;gap:22px;justify-content:center;margin-bottom:18px}
+  .social a{text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
+  .social a:hover{color:var(--gold)}
+
+  @media (max-width:860px){
+    .links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--cream);border-bottom:1px solid var(--gold-soft)}
+    .links.open{display:flex}
+    .links li a{display:block;padding:16px 24px;border-top:1px solid var(--cream-2)}
+    .menu-btn{display:block}
+    .about-grid,.menu-grid,.visit-grid{grid-template-columns:1fr;gap:40px}
+    .orders-grid,.pillars{grid-template-columns:1fr}
+    section{padding:72px 0}
+    .panel{padding:28px 22px}
+    .wrap{padding:0 16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#top" class="brand">Tepperman <span>Table</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="links" id="nav-links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#orders">Orders</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <img src="assets/logo.jpg" alt="The Tepperman Table &amp; Co. — Good Food, Fine Company, Texas Roots" width="640" height="640">
+      <p class="lead">Scratch-made breads, pastries and pies, baked fresh every morning and meant to be shared around a full table.</p>
+      <div class="btns">
+        <a class="btn solid" href="#orders">Place an Order</a>
+        <a class="btn" href="#menu">See the Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="about" id="story">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h2 style="margin:10px 0 22px">Pull up a chair.</h2>
+          <p>The Tepperman Table &amp; Co. started the way the best things do: around a long wooden table, with too much food and the people we love. Family recipes, a well-worn rolling pin, and a stubborn belief that real butter matters.</p>
+          <p>Today we bake small batches by hand, from scratch, every day. Nothing comes out of a box, and nothing leaves our kitchen unless we'd serve it at our own table.</p>
+        </div>
+        <blockquote>“Good food tastes better in fine company. That's the whole recipe.”</blockquote>
+      </div>
+      <div class="pillars">
+        <div><span class="star">★</span><strong>Good Food</strong><span>Real butter, local flour and eggs, and recipes passed down by hand.</span></div>
+        <div><span class="star">★</span><strong>Fine Company</strong><span>Baked for birthdays, Sunday suppers, and the ordinary days too.</span></div>
+        <div><span class="star">★</span><strong>Texas Roots</strong><span>Kolaches, pecan pie and peach cobbler, the way Texas does them.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="menu-head">
+        <p class="eyebrow">From the Oven</p>
+        <div class="rule">★</div>
+        <h2>The Menu</h2>
+        <p style="margin-top:14px">A look at what's coming out of the oven. Our selection changes with the seasons, so ask about today's specials.</p>
+      </div>
+
+      <div class="menu-grid">
+        <div class="cat">
+          <h3>Breads <small>Daily</small></h3>
+          <div class="item"><b>Country Sourdough</b><span class="price">$9</span><p>Naturally leavened over two days, with a crackly crust and an open crumb.</p></div>
+          <div class="item"><b>Honey Wheat Sandwich Loaf</b><span class="price">$8</span><p>Soft, slightly sweet, made for school lunches and grilled cheese.</p></div>
+          <div class="item"><b>Jalapeño Cheddar Loaf</b><span class="price">$10</span><p>Sharp cheddar and roasted jalapeños folded through every slice.</p></div>
+          <div class="item"><b>Rosemary Focaccia</b><span class="price">$9</span><p>Olive oil, flaky salt and fresh rosemary, baked in cast iron.</p></div>
+        </div>
+
+        <div class="cat">
+          <h3>Kolaches <small>Texas Favorites</small></h3>
+          <div class="item"><b>Fruit Kolaches</b><span class="price">$3.5</span><p>Pillowy sweet dough with apricot, cherry, peach or cream cheese.</p></div>
+          <div class="item"><b>Sausage &amp; Cheese Klobasniky</b><span class="price">$4</span><p>The savory Texas breakfast classic, wrapped in our kolache dough.</p></div>
+          <div class="item"><b>Jalapeño Sausage Klobasniky</b><span class="price">$4.5</span><p>A little heat to wake you up.</p></div>
+          <div class="item"><b>Dozen Box</b><span class="price">$36</span><p>Mix and match any twelve. Perfect for the office.</p></div>
+        </div>
+
+        <div class="cat">
+          <h3>Pastries <small>Mornings</small></h3>
+          <div class="item"><b>Brown Butter Cinnamon Roll</b><span class="price">$5</span><p>Big, gooey, and finished with cream cheese frosting.</p></div>
+          <div class="item"><b>Buttermilk Biscuits</b><span class="price">$3</span><p>Tall, flaky layers, with honey butter on the side.</p></div>
+          <div class="item"><b>Seasonal Scone</b><span class="price">$4</span><p>Ask what's in season: blueberry lemon, pumpkin spice and more.</p></div>
+          <div class="item"><b>Morning Glory Muffin</b><span class="price">$4</span><p>Carrot, apple, coconut and pecans.</p></div>
+        </div>
+
+        <div class="cat">
+          <h3>Pies &amp; Cakes <small>Whole or by the Slice</small></h3>
+          <div class="item"><b>Texas Pecan Pie</b><span class="price">$32</span><p>Toasted Texas pecans in a brown sugar filling and an all-butter crust.</p></div>
+          <div class="item"><b>Peach Cobbler</b><span class="price">$28</span><p>Summer peaches under a golden biscuit topping.</p></div>
+          <div class="item"><b>Texas Sheet Cake</b><span class="price">$30</span><p>Rich chocolate cake under warm fudge icing and pecans.</p></div>
+          <div class="item"><b>Celebration Cakes</b><span class="price">from $55</span><p>Custom layer cakes for birthdays, showers and anniversaries. See Orders below.</p></div>
+        </div>
+      </div>
+      <p class="note">Menu items and prices are samples. Swap in your real ones before launch.</p>
+    </div>
+  </section>
+
+  <!-- ORDERS -->
+  <section class="orders" id="orders">
+    <div class="wrap center">
+      <p class="eyebrow">Custom Orders</p>
+      <div class="rule">★</div>
+      <h2>Let us bake for your table.</h2>
+      <p class="lead2" style="margin-top:16px">From a dozen kolaches for the office to a full spread for a family celebration, we'll make it from scratch.</p>
+      <div class="orders-grid">
+        <div class="card"><h3>Celebration Cakes</h3><p>Birthdays, showers, anniversaries and graduations. Please order at least 5 days ahead.</p></div>
+        <div class="card"><h3>Holiday Pies</h3><p>Thanksgiving and Christmas pre-orders fill up fast, so reserve your pies early.</p></div>
+        <div class="card"><h3>Catering &amp; Events</h3><p>Breakfast trays, dessert tables and bread service for gatherings of any size.</p></div>
+      </div>
+      <div class="btns" style="margin-top:44px">
+        <a class="btn" href="mailto:hello@theteppermantableandco.com?subject=Custom%20Order%20Request">Request an Order</a>
+        <a class="btn" href="tel:+15555555555">Call the Bakery</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:48px">
+        <p class="eyebrow">Come Say Hello</p>
+        <div class="rule">★</div>
+        <h2>Visit the Bakery</h2>
+      </div>
+      <div class="visit-grid">
+        <div class="panel">
+          <h3>Hours</h3>
+          <ul class="hours">
+            <li><span>Monday</span><span class="closed">Closed</span></li>
+            <li><span>Tuesday – Friday</span><span>7:00 am – 3:00 pm</span></li>
+            <li><span>Saturday</span><span>7:00 am – 2:00 pm</span></li>
+            <li><span>Sunday</span><span>8:00 am – 12:00 pm</span></li>
+          </ul>
+          <p style="margin-top:18px;font-size:.92rem;color:var(--ink-soft);font-style:italic">We bake until we sell out. Come early for the best selection.</p>
+        </div>
+        <div class="panel">
+          <h3>Find Us</h3>
+          <address>123 Main Street<br>Your Town, TX 75000</address>
+          <p class="contact-line"><strong>Phone:</strong> <a href="tel:+15555555555">(555) 555-5555</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:hello@theteppermantableandco.com">hello@theteppermantableandco.com</a></p>
+          <div class="btns" style="justify-content:flex-start;margin-top:24px">
+            <a class="btn solid" href="https://maps.google.com/?q=123+Main+Street" target="_blank" rel="noopener">Get Directions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="social">
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <p class="tagline">Good Food<i>•</i>Fine Company<i>•</i>Texas Roots</p>
+    <p>© <span id="yr">2026</span> The Tepperman Table &amp; Co. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const btn=document.querySelector('.menu-btn'),links=document.getElementById('nav-links');
+  btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');btn.setAttribute('aria-expanded',false)}));
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
