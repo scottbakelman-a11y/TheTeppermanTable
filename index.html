@@ -192,6 +192,82 @@
     .panel{padding:28px 22px}
     .wrap{padding:0 16px}
   }
+  /* ===== order builder (#create-order) ===== */
+  #builder .page-top{margin:34px 0 22px;display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+  #builder .page-top h1{font-size:2.4rem}
+  #builder .page-top p{color:var(--ink-soft)}
+  #builder .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:start;margin-bottom:60px}
+  #builder .card{background:var(--paper);border:1px solid var(--gold-soft);padding:24px 24px 8px;margin-bottom:20px}
+  #builder .card h2{font-size:1.5rem;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--gold-soft)}
+  #builder .row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  #builder .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 16px}
+  #builder label{display:block;font-size:.68rem;letter-spacing:.17em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:16px}
+  #builder .opt{color:#A89C88;font-weight:400;letter-spacing:.06em}
+  #builder input,#builder select,#builder textarea{display:block;width:100%;margin-top:6px;padding:10px 11px;border:1px solid var(--gold-soft);background:#fff;color:var(--ink);font:inherit;font-size:.98rem;letter-spacing:normal;text-transform:none;font-weight:400;border-radius:0}
+  #builder input:focus,#builder select:focus,#builder textarea:focus{outline:none;border-color:var(--gold)}
+  #builder textarea{resize:vertical;min-height:80px}
+  #builder .items{width:100%;border-collapse:collapse;margin-bottom:12px}
+  #builder .items th{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);text-align:left;padding:0 6px 6px;font-weight:700}
+  #builder .items td{padding:5px 6px;vertical-align:top}
+  #builder .items td input,#builder .items td select{margin-top:0;padding:8px 9px}
+  #builder .items .c-qty{width:76px}
+  #builder .items .c-price{width:110px}
+  #builder .items .c-total{width:96px;text-align:right}
+  #builder .items .c-x{width:34px}
+  #builder .items td.c-total{padding-top:13px;font-weight:700;font-family:var(--serif);font-size:1.1rem}
+  #builder .items .custom{margin-top:6px}
+  #builder .x{background:none;border:0;color:#A89C88;font-size:1.3rem;cursor:pointer;line-height:1;padding:8px 4px}
+  #builder .x:hover{color:var(--red)}
+  #builder .need{border-color:var(--red)!important}
+  #builder .totals{margin:6px 0 18px auto;max-width:320px}
+  #builder .totals div{display:flex;justify-content:space-between;padding:5px 0}
+  #builder .totals .grand{border-top:1px solid var(--gold-soft);margin-top:6px;padding-top:10px;font-family:var(--serif);font-size:1.5rem;font-weight:700}
+  #builder .totals .due{color:var(--gold);font-weight:700}
+  #builder .btn{display:inline-block;padding:11px 18px;border:1.5px solid var(--ink);background:none;color:var(--ink);font:inherit;font-size:.74rem;letter-spacing:.17em;text-transform:uppercase;font-weight:700;cursor:pointer;text-decoration:none;transition:.15s}
+  #builder .btn:hover{background:var(--ink);color:var(--cream)}
+  #builder .btn.solid{background:var(--ink);color:var(--cream)}
+  #builder .btn.solid:hover{background:var(--gold);border-color:var(--gold)}
+  #builder .btn.small{padding:8px 12px;font-size:.68rem}
+  #builder .preview{position:sticky;top:20px}
+  #builder .preview .card{padding-bottom:22px}
+  #builder .mail-head{font-size:.88rem;color:var(--ink-soft);margin-bottom:10px;line-height:1.7}
+  #builder .mail-head b{color:var(--ink)}
+  #builder pre{white-space:pre-wrap;font-family:var(--sans);font-size:.92rem;background:#fff;border:1px dashed var(--gold-soft);padding:16px;max-height:56vh;overflow:auto;line-height:1.5}
+  #builder .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  #builder .msg{margin-top:12px;font-size:.9rem;min-height:1.3em}
+  #builder .msg.err{color:var(--red)}
+  #builder .msg.ok{color:var(--sage)}
+  @media (max-width:900px){
+  #builder .grid{grid-template-columns:1fr}
+  #builder .preview{position:static}
+  }
+  @media (max-width:560px){
+  #builder .row,#builder .row3{grid-template-columns:1fr}
+  #builder .items .c-price{width:82px}
+  #builder .items .c-qty{width:58px}
+  #builder .items .c-total{width:70px}
+  #builder .card{padding:18px 14px 6px}
+  }
+  #builder{display:none;padding:20px 0 40px}
+  #builder [hidden]{display:none!important}
+  #builder .card{text-align:left}
+  #builder .card p{color:inherit}
+  body.builder-mode #builder{display:block}
+  body.builder-mode main>section:not(#builder),body.builder-mode footer{display:none}
+  #builder .page-top h1{font-size:2.4rem}
+  #builder .tag-admin{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  @media print{
+    body.printing-order header,body.printing-order main>section:not(#builder),body.printing-order footer,
+    body.printing-order #builder .grid>div:first-child,body.printing-order #builder .page-top,
+    body.printing-order #builder .actions,body.printing-order #builder .msg,body.printing-order #builder .mail-head{display:none!important}
+    body.printing-order{background:#fff}
+    body.printing-order #builder{display:block;padding:0}
+    body.printing-order #builder .grid{display:block}
+    body.printing-order #builder .preview{position:static}
+    body.printing-order #builder .preview .card{border:0;background:#fff;padding:0}
+    body.printing-order #builder pre{border:0;max-height:none;font-size:11pt}
+  }
+
 </style>
 </head>
 <body>
@@ -409,6 +485,82 @@
       </div>
     </div>
   </section>
+  <!-- ORDER BUILDER (bakery use only). Not linked anywhere; open it at /#create-order -->
+  <section id="builder">
+    <div class="wrap">
+  <div class="page-top">
+    <div><p class="tag-admin">Bakery use only</p><h1>Create an Order</h1><p>Build the order, then email it to the customer from your own inbox.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="new-order" type="button">Start New Order</button><a class="btn" href="#top" id="exit-builder">Back to Site</a></div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <section class="card">
+        <h2>Customer</h2>
+        <div class="row">
+          <label>Name<input id="c-name" autocomplete="off"></label>
+          <label>Email<input id="c-email" type="email" autocomplete="off"></label>
+        </div>
+        <div class="row">
+          <label>Phone <span class="opt">(optional)</span><input id="c-phone" type="tel" autocomplete="off"></label>
+          <label>Order #<input id="o-num"></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Pickup / Delivery</h2>
+        <div class="row3">
+          <label>Method
+            <select id="o-method"><option>Pickup</option><option>Delivery</option></select>
+          </label>
+          <label>Date<input id="o-date" type="date"></label>
+          <label>Time <span class="opt">(optional)</span><input id="o-time" type="time"></label>
+        </div>
+        <label id="addr-wrap" hidden>Delivery address<input id="o-addr" autocomplete="off"></label>
+      </section>
+
+      <section class="card">
+        <h2>Items</h2>
+        <table class="items">
+          <thead><tr><th>Item</th><th class="c-price">Price</th><th class="c-qty">Qty</th><th class="c-total">Total</th><th class="c-x"></th></tr></thead>
+          <tbody id="items"></tbody>
+        </table>
+        <button class="btn small" id="add-item" type="button">+ Add Item</button>
+
+        <div class="totals">
+          <div><span>Subtotal</span><span id="t-sub">$0.00</span></div>
+          <div id="fee-row" hidden><span>Delivery fee</span><span><input id="o-fee" type="number" min="0" step="0.01" value="0" style="width:96px;display:inline-block;margin:0;padding:5px 7px;text-align:right"></span></div>
+          <div><span><label style="display:inline-flex;align-items:center;gap:8px;margin:0;font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:400"><input id="o-taxon" type="checkbox" checked style="width:auto;margin:0"> Sales tax <input id="o-taxrate" type="number" min="0" max="20" step="0.01" value="8.25" style="width:68px;display:inline-block;margin:0;padding:4px 6px;text-align:right">%</label></span><span id="t-tax">$0.00</span></div>
+          <div class="grand"><span>Total</span><span id="t-total">$0.00</span></div>
+          <div><span>Deposit paid</span><span><input id="o-paid" type="number" min="0" step="0.01" value="0" style="width:96px;display:inline-block;margin:0;padding:5px 7px;text-align:right"></span></div>
+          <div class="due"><span>Balance due</span><span id="t-due">$0.00</span></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Notes &amp; Message</h2>
+        <label>Order notes <span class="opt">(flavors, decorations, allergies…)</span><textarea id="o-notes"></textarea></label>
+        <label>Message to customer<textarea id="o-msg"></textarea></label>
+      </section>
+    </div>
+
+    <aside class="preview">
+      <section class="card">
+        <h2>Email Preview</h2>
+        <div class="mail-head"><b>To:</b> <span id="p-to">—</span><br><b>Subject:</b> <span id="p-subj"></span></div>
+        <pre id="p-body"></pre>
+        <div class="actions">
+          <button class="btn solid" id="send" type="button">Email to Customer</button>
+          <button class="btn" id="copy" type="button">Copy Text</button>
+          <button class="btn" id="print" type="button">Print</button>
+        </div>
+        <p class="msg" id="msg" role="status"></p>
+      </section>
+    </aside>
+  </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -501,6 +653,218 @@
       const b=of.querySelector('button.send');b.disabled=true;b.textContent='Sending…';
     });
   }
+</script>
+<script>
+// ---- Order builder (bakery use only, opens at #create-order)
+(() => {
+  // ---- Menu (keep in sync with the website menu). price: null = you set the price per order.
+  const MENU = {
+    'Breads': [['Sourdough',8],['Chocolate Chip Sourdough',10],['Blueberry Sourdough',10],['Steam Engine',6],['Honey Oat',6],['English Muffins',null]],
+    'Cookies': [['Good Old Chocolate Chip',2],['Pumpkin Chip Cookie',2],['Monster Cookie',2]],
+    'Cakes': [['Coffee Cakes',null],['Banana Loaf',null]],
+    'Pies': [['Pecan Pie',null]],
+  };
+  const BAKERY = 'The Tepperman Table & Co.';
+  const BAKERY_EMAIL = 'Hello@TeppermanTable.com';
+  const DEFAULT_MSG = "Thank you for your order! Here are the details we have. Please reply to this email if anything needs to change.\n\nWe'll be in touch about payment before your order date.";
+  const KEY = 'tt-order-draft';
+  if (!document.getElementById('builder')) return;
+
+  const $ = id => document.getElementById(id);
+  const money = n => '$' + (Math.round(n * 100) / 100).toFixed(2);
+  const num = v => { const n = parseFloat(v); return isFinite(n) && n > 0 ? n : 0; };
+
+  const options = ['<option value="">Choose an item…</option>']
+    .concat(Object.entries(MENU).map(([cat, items]) =>
+      `<optgroup label="${cat}">` + items.map(([n, p]) => `<option value="${n}" data-price="${p ?? ''}">${n}${p ? ' — ' + money(p) : ''}</option>`).join('') + '</optgroup>'))
+    .concat(['<option value="__custom">Special / custom item…</option>']).join('');
+
+  function addRow(it = {}) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><select class="i-item">${options}</select><input class="i-custom custom" placeholder="Describe the item" hidden></td>
+      <td class="c-price"><input class="i-price" type="number" min="0" step="0.01" placeholder="0.00"></td>
+      <td class="c-qty"><input class="i-qty" type="number" min="1" step="1" value="1"></td>
+      <td class="c-total">$0.00</td>
+      <td class="c-x"><button class="x" type="button" title="Remove">×</button></td>`;
+    $('items').appendChild(tr);
+    const sel = tr.querySelector('.i-item');
+    if (it.item) {
+      const known = [...sel.options].some(o => o.value === it.item);
+      sel.value = known ? it.item : '__custom';
+      if (!known) tr.querySelector('.i-custom').value = it.item;
+    }
+    if (it.price != null) tr.querySelector('.i-price').value = it.price;
+    if (it.qty) tr.querySelector('.i-qty').value = it.qty;
+    tr.querySelector('.i-custom').hidden = sel.value !== '__custom';
+    return tr;
+  }
+
+  function rows() {
+    return [...$('items').children].map(tr => {
+      const sel = tr.querySelector('.i-item');
+      const name = sel.value === '__custom' ? tr.querySelector('.i-custom').value.trim() : sel.value;
+      const price = num(tr.querySelector('.i-price').value);
+      const qty = Math.max(0, parseInt(tr.querySelector('.i-qty').value) || 0);
+      return { tr, name, price, qty, rawPrice: tr.querySelector('.i-price').value };
+    });
+  }
+
+  function fmtDate(v) {
+    if (!v) return '';
+    return new Date(v + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+  function fmtTime(v) {
+    if (!v) return '';
+    const [h, m] = v.split(':').map(Number);
+    return new Date(2000, 0, 1, h, m).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  function build() {
+    const list = rows();
+    let sub = 0;
+    list.forEach(r => { const t = r.price * r.qty; sub += t; r.tr.querySelector('.c-total').textContent = money(t); });
+    const delivery = $('o-method').value === 'Delivery';
+    $('fee-row').hidden = !delivery; $('addr-wrap').hidden = !delivery;
+    const fee = delivery ? num($('o-fee').value) : 0;
+    const taxRate = $('o-taxon').checked ? num($('o-taxrate').value) / 100 : 0;
+    $('o-taxrate').disabled = !$('o-taxon').checked;
+    const tax = Math.round((sub + fee) * taxRate * 100) / 100;
+    $('t-tax').textContent = money(tax);
+    const total = sub + fee + tax, paid = num($('o-paid').value), due = Math.max(0, total - paid);
+    $('t-sub').textContent = money(sub); $('t-total').textContent = money(total); $('t-due').textContent = money(due);
+
+    const name = $('c-name').value.trim(), first = name.split(/\s+/)[0] || 'there';
+    const onum = $('o-num').value.trim();
+    const when = [fmtDate($('o-date').value), fmtTime($('o-time').value)].filter(Boolean).join(' at ');
+    const lines = [];
+    lines.push(`Hi ${first},`, '', $('o-msg').value.trim(), '');
+    lines.push(`ORDER ${onum ? '#' + onum : ''}`.trim());
+    lines.push('────────────────────────');
+    list.filter(r => r.name).forEach(r => lines.push(`${r.qty} × ${r.name} @ ${money(r.price)}  =  ${money(r.price * r.qty)}`));
+    lines.push('────────────────────────');
+    lines.push(`Subtotal: ${money(sub)}`);
+    if (delivery && fee) lines.push(`Delivery fee: ${money(fee)}`);
+    if (taxRate) lines.push(`Sales tax (${+(taxRate * 100).toFixed(3)}%): ${money(tax)}`);
+    lines.push(`TOTAL: ${money(total)}`);
+    if (paid) { lines.push(`Deposit paid: ${money(paid)}`); lines.push(`Balance due: ${money(due)}`); }
+    lines.push('');
+    lines.push(`${$('o-method').value}: ${when || 'date to be confirmed'}`);
+    if (delivery && $('o-addr').value.trim()) lines.push(`Deliver to: ${$('o-addr').value.trim()}`);
+    if ($('o-notes').value.trim()) { lines.push('', 'Notes:', $('o-notes').value.trim()); }
+    lines.push('', 'Thank you!', BAKERY, 'Carrollton, Texas', BAKERY_EMAIL);
+
+    const subj = `Your order ${onum ? '#' + onum + ' ' : ''}from ${BAKERY}`;
+    $('p-to').textContent = $('c-email').value.trim() || '—';
+    $('p-subj').textContent = subj;
+    $('p-body').textContent = lines.join('\n');
+    save();
+    return { subj, body: lines.join('\n'), list };
+  }
+
+  // ---- draft autosave (this browser only)
+  const fields = ['c-name','c-email','c-phone','o-num','o-method','o-date','o-time','o-addr','o-fee','o-paid','o-taxrate','o-notes','o-msg'];
+  function save() {
+    try {
+      const d = Object.fromEntries(fields.map(f => [f, $(f).value]));
+      d.taxon = $('o-taxon').checked;
+      d.items = rows().map(r => ({ item: r.name, price: r.rawPrice, qty: r.tr.querySelector('.i-qty').value }));
+      localStorage.setItem(KEY, JSON.stringify(d));
+    } catch (_) {}
+  }
+  function newNumber() {
+    const d = new Date(), p = n => String(n).padStart(2, '0');
+    return `TT-${String(d.getFullYear()).slice(2)}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+  }
+  function reset() {
+    fields.forEach(f => $(f).value = '');
+    $('o-method').value = 'Pickup'; $('o-fee').value = 0; $('o-paid').value = 0; $('o-taxrate').value = '8.25'; $('o-taxon').checked = true;
+    $('o-num').value = newNumber(); $('o-msg').value = DEFAULT_MSG;
+    $('items').innerHTML = ''; addRow();
+    $('msg').textContent = '';
+    try { localStorage.removeItem(KEY); } catch (_) {}
+    build();
+  }
+  function load() {
+    let d = null;
+    try { d = JSON.parse(localStorage.getItem(KEY)); } catch (_) {}
+    if (!d) return reset();
+    fields.forEach(f => { if (d[f] != null) $(f).value = d[f]; });
+    if (d.taxon != null) $('o-taxon').checked = d.taxon;
+    $('items').innerHTML = '';
+    (d.items && d.items.length ? d.items : [{}]).forEach(addRow);
+    build();
+  }
+
+  // ---- events
+  $('items').addEventListener('change', e => {
+    if (!e.target.classList.contains('i-item')) return;
+    const tr = e.target.closest('tr'), opt = e.target.selectedOptions[0];
+    const custom = e.target.value === '__custom';
+    tr.querySelector('.i-custom').hidden = !custom;
+    tr.querySelector('.i-price').value = opt.dataset.price || '';
+    (custom ? tr.querySelector('.i-custom') : !opt.dataset.price && e.target.value ? tr.querySelector('.i-price') : tr.querySelector('.i-qty')).focus();
+    build();
+  });
+  $('items').addEventListener('click', e => {
+    if (!e.target.classList.contains('x')) return;
+    e.target.closest('tr').remove();
+    if (!$('items').children.length) addRow();
+    build();
+  });
+  const root = $('builder');
+  root.addEventListener('input', e => {
+    e.target.classList && e.target.classList.remove('need');
+    if ($('msg').classList.contains('err')) { $('msg').textContent = ''; $('msg').className = 'msg'; }
+    build();
+  });
+  root.addEventListener('change', build);
+  $('add-item').addEventListener('click', () => { addRow().querySelector('.i-item').focus(); build(); });
+  $('new-order').addEventListener('click', () => { if (confirmClear()) reset(); });
+  function confirmClear() {
+    const b = $('new-order');
+    if (b.dataset.armed) { delete b.dataset.armed; b.textContent = 'Start New Order'; return true; }
+    b.dataset.armed = 1; b.textContent = 'Click again to clear';
+    setTimeout(() => { delete b.dataset.armed; b.textContent = 'Start New Order'; }, 3000);
+    return false;
+  }
+
+  function check() {
+    const { list } = build();
+    const problems = [];
+    document.querySelectorAll('.need').forEach(el => el.classList.remove('need'));
+    const email = $('c-email');
+    if (!$('c-name').value.trim()) { problems.push('customer name'); $('c-name').classList.add('need'); }
+    if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) { problems.push('customer email'); email.classList.add('need'); }
+    const items = list.filter(r => r.name);
+    if (!items.length) problems.push('at least one item');
+    list.forEach(r => {
+      if (r.name && !r.price) { problems.push(`a price for ${r.name}`); r.tr.querySelector('.i-price').classList.add('need'); }
+      if (r.tr.querySelector('.i-item').value === '__custom' && !r.name) { problems.push('a name for the custom item'); r.tr.querySelector('.i-custom').classList.add('need'); }
+    });
+    if (problems.length) { $('msg').className = 'msg err'; $('msg').textContent = 'Please add ' + problems.join(', ') + '.'; return null; }
+    return build();
+  }
+
+  $('send').addEventListener('click', () => {
+    const o = check(); if (!o) return;
+    const href = `mailto:${encodeURIComponent($('c-email').value.trim())}?subject=${encodeURIComponent(o.subj)}&body=${encodeURIComponent(o.body.replace(/\n/g, '\r\n'))}`;
+    location.href = href;
+    $('msg').className = 'msg ok';
+    $('msg').textContent = 'Your email app should open with the order ready. Review it and hit Send. If nothing opened, use Copy Text and paste it into a new email.';
+  });
+  $('copy').addEventListener('click', async () => {
+    const o = build();
+    try { await navigator.clipboard.writeText(`Subject: ${o.subj}\n\n${o.body}`); $('msg').className = 'msg ok'; $('msg').textContent = 'Copied. Paste it into a new email.'; }
+    catch (_) { $('msg').className = 'msg err'; $('msg').textContent = 'Couldn’t copy automatically. Select the preview text and copy it.'; }
+  });
+  $('print').addEventListener('click', () => { document.body.classList.add('printing-order'); window.print(); });
+  window.addEventListener('afterprint', () => document.body.classList.remove('printing-order'));
+  function mode() { const on = location.hash === '#create-order'; document.body.classList.toggle('builder-mode', on); if (on) window.scrollTo(0, 0); }
+  window.addEventListener('hashchange', mode); mode();
+
+  load();
+})();
 </script>
 </body>
 </html>

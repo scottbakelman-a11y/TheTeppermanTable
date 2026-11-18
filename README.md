@@ -3,8 +3,7 @@
 A single-page bakery site (plain HTML/CSS, no build step), hosted on GitHub Pages. The Special Request form emails each request to TeppermanCO.99@outlook.com using FormSubmit (free, no account).
 
 ## Files
-- `index.html` — the whole site, including the Special Request form
-- `order.html` — your order builder (not linked from the site): build an order, then email it to the customer
+- `index.html` — the whole site: menu, Order Online, Special Request form, and your hidden order builder (`/#create-order`)
 - `logo.jpg`, `favicon.png`, `apple-touch-icon.png` — logo and icons
 - `CNAME` — tells GitHub Pages your custom domain
 
@@ -48,8 +47,8 @@ Note: leave the MX (email) records in Wix untouched if you use email on this dom
 - You get an email titled **New Special Request – The Tepperman Table & Co.** with all their details. Hit **Reply** to answer them.
 - The customer automatically gets a confirmation email with a copy of what they sent.
 
-## 5. Create and email an order (`order.html`)
-Open `https://www.theteppermantableandco.com/order.html` (bookmark it).
+## 5. Create and email an order (order builder)
+Open `https://www.theteppermantableandco.com/#create-order` (bookmark it). It isn't linked anywhere on the site; **Back to Site** returns to the normal page.
 1. Enter the customer's name and email. The order number fills in automatically.
 2. Choose pickup or delivery, the date and time.
 3. Add items from the menu. Prices fill in; type a price for "Email for pricing" items. Use **Special / custom item** for anything else.
@@ -58,4 +57,4 @@ Open `https://www.theteppermantableandco.com/order.html` (bookmark it).
    If your email app doesn't open (for example, if you use Outlook in a browser), click **Copy Text** and paste it into a new email.
 - **Print** gives you a paper copy of the order for the kitchen.
 - Your work saves automatically in that browser until you click **Start New Order**.
-- If you change the menu on the site, tell Claude (or edit the `MENU` list near the bottom of `order.html`) so the builder matches.
+- If you change the menu on the site, tell Claude (or edit the `MENU` list in the order-builder script near the bottom of `index.html`) so the builder matches.
