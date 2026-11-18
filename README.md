@@ -4,6 +4,7 @@ A single-page bakery site (plain HTML/CSS, no build step), hosted on GitHub Page
 
 ## Files
 - `index.html` — the whole site, including the Special Request form
+- `order.html` — your order builder (not linked from the site): build an order, then email it to the customer
 - `logo.jpg`, `favicon.png`, `apple-touch-icon.png` — logo and icons
 - `CNAME` — tells GitHub Pages your custom domain
 
@@ -31,12 +32,24 @@ Note: leave the MX (email) records in Wix untouched if you use email on this dom
 
 ## 4. Turn on the Special Request emails (one time)
 1. On the live site, fill in **Submit a Special Request** yourself and send it.
-   The first time, the page will say something went wrong. That's expected: the form isn't activated yet.
+   The first time, FormSubmit shows a page saying the form needs activation. That's expected.
 2. Check the TeppermanCO.99@outlook.com inbox (and **Junk**) for an email from **FormSubmit** and click **Activate Form**.
-3. Send one more test request. It should now arrive in your inbox, and customers will see a thank-you message.
-4. Optional, to hide your Outlook address from the page code: FormSubmit's activation email includes a random code. In `index.html`, find `FORM_ENDPOINT` near the bottom and replace `TeppermanCO.99@outlook.com` with that code.
+3. Send one more test request using a different email address you can check. You should get the request in Outlook, and that address should get a confirmation copy.
+4. Optional, to hide your Outlook address from the page code: the activation email includes a random code. In `index.html`, find `action="https://formsubmit.co/TeppermanCO.99@outlook.com"` and replace the email with that code.
 
-### Using it
-- Each request arrives as an email titled **New Special Request – The Tepperman Table & Co.**, with the customer's name, email, phone, order type, date needed, quantity and details.
-- Hit **Reply** to answer the customer directly.
-- Tip: make an Outlook folder or rule for that subject line so requests are easy to track.
+### How requests work
+- The customer clicks **Send Request**, ticks FormSubmit's "I'm not a robot" check, and lands back on your site with a thank-you message.
+- You get an email titled **New Special Request – The Tepperman Table & Co.** with all their details. Hit **Reply** to answer them.
+- The customer automatically gets a confirmation email with a copy of what they sent.
+
+## 5. Create and email an order (`order.html`)
+Open `https://www.theteppermantableandco.com/order.html` (bookmark it).
+1. Enter the customer's name and email. The order number fills in automatically.
+2. Choose pickup or delivery, the date and time.
+3. Add items from the menu. Prices fill in; type a price for "Email for pricing" items. Use **Special / custom item** for anything else.
+4. Add a delivery fee or deposit if needed. The total and balance due update as you go.
+5. Click **Email to Customer**. Your email app opens with the completed order written out. Review it and hit **Send**.
+   If your email app doesn't open (for example, if you use Outlook in a browser), click **Copy Text** and paste it into a new email.
+- **Print** gives you a paper copy of the order for the kitchen.
+- Your work saves automatically in that browser until you click **Start New Order**.
+- If you change the menu on the site, tell Claude (or edit the `MENU` list near the bottom of `order.html`) so the builder matches.

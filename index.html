@@ -262,13 +262,15 @@
         <a class="btn" href="#request">Submit a Special Request</a>
       </div>
 
-      <!-- SPECIAL REQUEST FORM: emailed to the bakery via FormSubmit (formsubmit.co).
-           After confirming the first test email, you can replace the address in FORM_ENDPOINT (near the bottom) with the random code FormSubmit gives you. -->
-      <form class="req" id="request" novalidate>
+      <!-- SPECIAL REQUEST FORM: emailed to the bakery via FormSubmit (formsubmit.co); the customer gets an automatic copy.
+           After activating, you can replace the email address in action="..." with the random code FormSubmit gives you. -->
+      <form class="req" id="request" action="https://formsubmit.co/TeppermanCO.99@outlook.com" method="POST">
         <h3>Submit a Special Request</h3>
         <p class="sub">Tell us what you'd like and when you need it. We'll email you back to confirm details and pricing.</p>
         <input type="hidden" name="_subject" value="New Special Request – The Tepperman Table &amp; Co.">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://www.theteppermantableandco.com/?sent=1#request">
+        <input type="hidden" name="_autoresponse" value="Thank you for your request to The Tepperman Table &amp; Co.! A copy of what you sent is below. We'll email you within a day or two to confirm the details and pricing. – The Tepperman Table &amp; Co., Carrollton, Texas">
         <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row">
           <label>Your Name<input type="text" name="name" required autocomplete="name"></label>
@@ -331,31 +333,20 @@
   btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
   links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');btn.setAttribute('aria-expanded',false)}));
   document.getElementById('yr').textContent=new Date().getFullYear();
-  // special request form -> email (FormSubmit)
-  const FORM_ENDPOINT='https://formsubmit.co/ajax/TeppermanCO.99@outlook.com';
+  // special request form: posts to FormSubmit (emails the bakery + sends the customer a copy),
+  // then FormSubmit sends the customer back here with ?sent=1
   const rq=document.getElementById('request');
   if(rq){
     const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
     document.getElementById('date-needed').min=d.toISOString().slice(0,10);
-    rq.addEventListener('submit',async e=>{
-      e.preventDefault();
-      const st=rq.querySelector('.status'),b=rq.querySelector('button');
-      if(!rq.checkValidity()){rq.reportValidity();return}
-      const f=new FormData(rq);
-      if(f.get('_honey')){return} // spam bot filled the hidden field
-      f.delete('_honey');
-      f.set('_replyto',f.get('email'));
-      b.disabled=true;b.textContent='Sending…';st.className='status';st.textContent='';
-      try{
-        const r=await fetch(FORM_ENDPOINT,{method:'POST',body:f,headers:{Accept:'application/json'}});
-        const j=await r.json().catch(()=>({}));
-        if(!r.ok||j.success===false||j.success==='false')throw new Error(j.message||r.status);
-        rq.innerHTML='<div class="done"><h3>Thank you!</h3><p>Your request is in. We\'ll email you within a day or two to confirm details and pricing.</p></div>';
-        rq.scrollIntoView({behavior:'smooth',block:'center'});
-      }catch(_){
-        st.className='status err';st.textContent='Something went wrong sending your request. Please try again, or email Hello@TeppermanTable.com.';
-        b.disabled=false;b.textContent='Send Request';
-      }
+    if(new URLSearchParams(location.search).get('sent')==='1'){
+      rq.innerHTML='<div class="done"><h3>Thank you!</h3><p>Your request is in, and a copy is on its way to your email. We\'ll be in touch within a day or two to confirm details and pricing.</p></div>';
+      history.replaceState(null,'',location.pathname+'#request');
+      setTimeout(()=>rq.scrollIntoView({block:'center'}),50);
+    }
+    rq.addEventListener('submit',e=>{
+      if(rq.querySelector('[name=_honey]').value){e.preventDefault();return}
+      const b=rq.querySelector('button');b.disabled=true;b.textContent='Sending…';
     });
   }
 </script>
