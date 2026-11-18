@@ -80,6 +80,8 @@
   .item .price{font-family:var(--serif);font-size:1.15rem;color:var(--gold);font-weight:600}
   .item p{grid-column:1/-1;font-size:.93rem;color:var(--ink-soft);line-height:1.5}
   .tag{font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;background:var(--sage);color:#fff;padding:2px 7px;margin-left:8px;vertical-align:middle;font-weight:700}
+  .item .price.ask{font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-style:italic;text-decoration:none;align-self:center}
+  .item .price.ask:hover{text-decoration:underline}
   .note{text-align:center;margin-top:40px;font-size:.9rem;color:var(--ink-soft);font-style:italic}
 
   /* orders */
@@ -93,8 +95,30 @@
   .orders .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
   .orders .lead2{max-width:620px;margin:0 auto;color:#D8CDB8}
 
+  /* special request form */
+  .req{scroll-margin-top:84px;max-width:720px;margin:56px auto 0;text-align:left;border:1px solid rgba(217,196,154,.35);padding:40px 36px}
+  .req h3{text-align:center;margin-bottom:6px}
+  .req .sub{text-align:center;color:#D8CDB8;font-size:.95rem;margin-bottom:28px}
+  .req .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .req label{display:block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold-soft);margin-bottom:18px}
+  .req input,.req select,.req textarea{display:block;width:100%;margin-top:7px;padding:12px 14px;background:rgba(251,248,241,.06);border:1px solid rgba(217,196,154,.45);color:var(--cream);font:inherit;font-size:1rem;letter-spacing:normal;text-transform:none;font-weight:400;border-radius:0}
+  .req select option{color:var(--ink)}
+  .req input:focus,.req select:focus,.req textarea:focus{outline:none;border-color:var(--gold)}
+  .req textarea{min-height:120px;resize:vertical}
+  .req .opt{color:#A89C88;font-weight:400;letter-spacing:.08em}
+  .req .hp{position:absolute;left:-5000px}
+  .orders .req button{cursor:pointer;background:var(--gold);border-color:var(--gold);color:var(--ink);font-family:inherit;display:block;margin:10px auto 0}
+  .orders .req button:hover{background:var(--cream);border-color:var(--cream);color:var(--ink)}
+  .req button:disabled{opacity:.6;cursor:wait}
+  .req .status{text-align:center;margin-top:18px;font-size:.95rem;min-height:1.4em}
+  .req .status.ok{color:var(--gold-soft)}
+  .req .status.err{color:#F0A99A}
+  .req .done{text-align:center;padding:20px 0}
+  .req .done h3{margin-bottom:10px}
+  .req .done p{color:#D8CDB8}
+
   /* visit */
-  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .visit-grid{display:grid;grid-template-columns:1fr;max-width:520px;margin:0 auto;text-align:center}
   .panel{background:var(--paper);border:1px solid var(--gold-soft);padding:40px}
   .hours{list-style:none;margin-top:14px}
   .hours li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--gold-soft)}
@@ -110,6 +134,8 @@
   .social{display:flex;gap:22px;justify-content:center;margin-bottom:18px}
   .social a{text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
   .social a:hover{color:var(--gold)}
+  .social span{font-weight:700;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
+  .social .soon{color:var(--gold);font-style:italic;text-transform:none;letter-spacing:.04em;font-size:.9rem}
 
   @media (max-width:860px){
     .links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--cream);border-bottom:1px solid var(--gold-soft)}
@@ -117,7 +143,9 @@
     .links li a{display:block;padding:16px 24px;border-top:1px solid var(--cream-2)}
     .menu-btn{display:block}
     .about-grid,.menu-grid,.visit-grid{grid-template-columns:1fr;gap:40px}
-    .orders-grid,.pillars{grid-template-columns:1fr}
+    .orders-grid,.pillars,.req .row{grid-template-columns:1fr}
+    .req{padding:28px 20px}
+    .req .row{gap:0}
     section{padding:72px 0}
     .panel{padding:28px 22px}
     .wrap{padding:0 16px}
@@ -167,7 +195,7 @@
       <div class="pillars">
         <div><span class="star">★</span><strong>Good Food</strong><span>Real butter, local flour and eggs, and recipes passed down by hand.</span></div>
         <div><span class="star">★</span><strong>Fine Company</strong><span>Baked for birthdays, Sunday suppers, and the ordinary days too.</span></div>
-        <div><span class="star">★</span><strong>Texas Roots</strong><span>Kolaches, pecan pie and peach cobbler, the way Texas does them.</span></div>
+        <div><span class="star">★</span><strong>Texas Roots</strong><span>Sourdough, monster cookies and pecan pie, the way Texas does them.</span></div>
       </div>
     </div>
   </section>
@@ -184,38 +212,37 @@
 
       <div class="menu-grid">
         <div class="cat">
-          <h3>Breads <small>Daily</small></h3>
-          <div class="item"><b>Country Sourdough</b><span class="price">$9</span><p>Naturally leavened over two days, with a crackly crust and an open crumb.</p></div>
-          <div class="item"><b>Honey Wheat Sandwich Loaf</b><span class="price">$8</span><p>Soft, slightly sweet, made for school lunches and grilled cheese.</p></div>
-          <div class="item"><b>Jalapeño Cheddar Loaf</b><span class="price">$10</span><p>Sharp cheddar and roasted jalapeños folded through every slice.</p></div>
-          <div class="item"><b>Rosemary Focaccia</b><span class="price">$9</span><p>Olive oil, flaky salt and fresh rosemary, baked in cast iron.</p></div>
+          <h3>Breads</h3>
+          <div class="item"><b>Sourdough</b><span class="price">$8.00</span></div>
+          <div class="item"><b>Chocolate Chip Sourdough</b><span class="price">$10.00</span></div>
+          <div class="item"><b>Blueberry Sourdough</b><span class="price">$10.00</span></div>
+          <div class="item"><b>Steam Engine</b><span class="price">$6.00</span></div>
+          <div class="item"><b>Honey Oat</b><span class="price">$6.00</span></div>
+          <div class="item"><b>English Muffins</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
+          <div class="item"><b>Specific / Special Orders</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
         </div>
 
         <div class="cat">
-          <h3>Kolaches <small>Texas Favorites</small></h3>
-          <div class="item"><b>Fruit Kolaches</b><span class="price">$3.5</span><p>Pillowy sweet dough with apricot, cherry, peach or cream cheese.</p></div>
-          <div class="item"><b>Sausage &amp; Cheese Klobasniky</b><span class="price">$4</span><p>The savory Texas breakfast classic, wrapped in our kolache dough.</p></div>
-          <div class="item"><b>Jalapeño Sausage Klobasniky</b><span class="price">$4.5</span><p>A little heat to wake you up.</p></div>
-          <div class="item"><b>Dozen Box</b><span class="price">$36</span><p>Mix and match any twelve. Perfect for the office.</p></div>
+          <h3>Cookies</h3>
+          <div class="item"><b>Good Old Chocolate Chip</b><span class="price">$2.00</span></div>
+          <div class="item"><b>Pumpkin Chip Cookie</b><span class="price">$2.00</span></div>
+          <div class="item"><b>Monster Cookie</b><span class="price">$2.00</span></div>
+          <div class="item"><b>Specific / Special Orders</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
         </div>
 
         <div class="cat">
-          <h3>Pastries <small>Mornings</small></h3>
-          <div class="item"><b>Brown Butter Cinnamon Roll</b><span class="price">$5</span><p>Big, gooey, and finished with cream cheese frosting.</p></div>
-          <div class="item"><b>Buttermilk Biscuits</b><span class="price">$3</span><p>Tall, flaky layers, with honey butter on the side.</p></div>
-          <div class="item"><b>Seasonal Scone</b><span class="price">$4</span><p>Ask what's in season: blueberry lemon, pumpkin spice and more.</p></div>
-          <div class="item"><b>Morning Glory Muffin</b><span class="price">$4</span><p>Carrot, apple, coconut and pecans.</p></div>
+          <h3>Cakes</h3>
+          <div class="item"><b>Coffee Cakes</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
+          <div class="item"><b>Banana Loaf</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
+          <div class="item"><b>Specific / Special Orders</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
         </div>
 
         <div class="cat">
-          <h3>Pies &amp; Cakes <small>Whole or by the Slice</small></h3>
-          <div class="item"><b>Texas Pecan Pie</b><span class="price">$32</span><p>Toasted Texas pecans in a brown sugar filling and an all-butter crust.</p></div>
-          <div class="item"><b>Peach Cobbler</b><span class="price">$28</span><p>Summer peaches under a golden biscuit topping.</p></div>
-          <div class="item"><b>Texas Sheet Cake</b><span class="price">$30</span><p>Rich chocolate cake under warm fudge icing and pecans.</p></div>
-          <div class="item"><b>Celebration Cakes</b><span class="price">from $55</span><p>Custom layer cakes for birthdays, showers and anniversaries. See Orders below.</p></div>
+          <h3>Pies</h3>
+          <div class="item"><b>Pecan</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
+          <div class="item"><b>Specific / Special Orders</b><a class="price ask" href="mailto:TeppermanCO.99@outlook.com">Email for pricing</a></div>
         </div>
       </div>
-      <p class="note">Menu items and prices are samples. Swap in your real ones before launch.</p>
     </div>
   </section>
 
@@ -232,9 +259,35 @@
         <div class="card"><h3>Catering &amp; Events</h3><p>Breakfast trays, dessert tables and bread service for gatherings of any size.</p></div>
       </div>
       <div class="btns" style="margin-top:44px">
-        <a class="btn" href="mailto:hello@theteppermantableandco.com?subject=Custom%20Order%20Request">Request an Order</a>
-        <a class="btn" href="tel:+15555555555">Call the Bakery</a>
+        <a class="btn" href="#request">Submit a Special Request</a>
       </div>
+
+      <!-- SPECIAL REQUEST FORM: saves to Supabase (keys live in config.js) -->
+      <form class="req" id="request" novalidate>
+        <h3>Submit a Special Request</h3>
+        <p class="sub">Tell us what you'd like and when you need it. We'll email you back to confirm details and pricing.</p>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="row">
+          <label>Your Name<input type="text" name="name" required autocomplete="name"></label>
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <div class="row">
+          <label>Phone <span class="opt">(optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
+          <label>What Kind of Order?
+            <select name="category" required>
+              <option value="" disabled selected>Choose one</option>
+              <option>Breads</option><option>Cookies</option><option>Cakes</option><option>Pies</option><option>Something else</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <label>Date Needed<input type="date" name="date_needed" id="date-needed" required></label>
+          <label>Quantity / Servings<input type="text" name="quantity" placeholder="e.g. 2 dozen cookies" required></label>
+        </div>
+        <label>Details<textarea name="details" required placeholder="Flavors, sizes, decorations, allergies, pickup time, anything we should know."></textarea></label>
+        <button type="submit" class="btn">Send Request</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
@@ -247,17 +300,10 @@
         <h2>Visit the Bakery</h2>
       </div>
       <div class="visit-grid">
-          </ul>
-          <p style="margin-top:18px;font-size:.92rem;color:var(--ink-soft);font-style:italic">We bake until we sell out. Come early for the best selection.</p>
-        </div>
         <div class="panel">
           <h3>Find Us</h3>
-          <address><br>Carrolton, Texas</address>
-          <p class="contact-line"><strong>Phone:</strong> <a href="tel:+15555555555"></a></p>
-          <p class="contact-line"><strong>Email:</strong> <a href="mailto:hello@theteppermantableandco.com">hello@theteppermantableandco.com</a></p>
-          <div class="btns" style="justify-content:flex-start;margin-top:24px">
-            <a class="btn solid" href="https://maps.google.com/?q=123+Main+Street" target="_blank" rel="noopener">Get Directions</a>
-          </div>
+          <address>Carrollton, Texas</address>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:TeppermanCO.99@outlook.com">Hello@TeppermanTable.com</a></p>
         </div>
       </div>
     </div>
@@ -267,19 +313,51 @@
 <footer>
   <div class="wrap">
     <div class="social">
-      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+      <span class="soon">Coming soon</span>
+      <span>Instagram</span>
+      <span>Facebook</span>
+      <span>TikTok</span>
     </div>
     <p class="tagline">Good Food<i>•</i>Fine Company<i>•</i>Texas Roots</p>
     <p>© <span id="yr">2026</span> The Tepperman Table &amp; Co. All rights reserved.</p>
   </div>
 </footer>
 
+<script src="config.js"></script>
 <script>
   const btn=document.querySelector('.menu-btn'),links=document.getElementById('nav-links');
   btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
   links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');btn.setAttribute('aria-expanded',false)}));
   document.getElementById('yr').textContent=new Date().getFullYear();
+  // special request form -> Supabase
+  const rq=document.getElementById('request');
+  if(rq){
+    const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
+    document.getElementById('date-needed').min=d.toISOString().slice(0,10);
+    rq.addEventListener('submit',async e=>{
+      e.preventDefault();
+      const st=rq.querySelector('.status'),b=rq.querySelector('button');
+      if(!rq.checkValidity()){rq.reportValidity();return}
+      const f=new FormData(rq);
+      if(f.get('website')){return} // spam bot filled the hidden field
+      const cfg=window.TEPPERMAN_CONFIG||{};
+      if(!cfg.SUPABASE_URL||cfg.SUPABASE_URL.startsWith('PASTE')){st.className='status err';st.textContent='The request form isn\'t connected yet. Please email Hello@TeppermanTable.com for now.';return}
+      const order={};
+      ['name','email','phone','category','date_needed','quantity','details'].forEach(k=>{const v=(f.get(k)||'').toString().trim();if(v)order[k]=v});
+      b.disabled=true;b.textContent='Sending…';st.className='status';st.textContent='';
+      try{
+        const r=await fetch(cfg.SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/orders',{method:'POST',
+          headers:{'Content-Type':'application/json',apikey:cfg.SUPABASE_ANON_KEY,Authorization:'Bearer '+cfg.SUPABASE_ANON_KEY,Prefer:'return=minimal'},
+          body:JSON.stringify(order)});
+        if(!r.ok)throw new Error(r.status);
+        rq.innerHTML='<div class="done"><h3>Thank you!</h3><p>Your request is in. We\'ll email you within a day or two to confirm details and pricing.</p></div>';
+        rq.scrollIntoView({behavior:'smooth',block:'center'});
+      }catch(_){
+        st.className='status err';st.textContent='Something went wrong sending your request. Please try again, or email Hello@TeppermanTable.com.';
+        b.disabled=false;b.textContent='Send Request';
+      }
+    });
+  }
 </script>
 </body>
 </html>
