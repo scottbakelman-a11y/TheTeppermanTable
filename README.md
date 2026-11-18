@@ -37,6 +37,12 @@ Note: leave the MX (email) records in Wix untouched if you use email on this dom
 3. Send one more test request using a different email address you can check. You should get the request in Outlook, and that address should get a confirmation copy.
 4. Optional, to hide your Outlook address from the page code: the activation email includes a random code. In `index.html`, find `action="https://formsubmit.co/TeppermanCO.99@outlook.com"` and replace the email with that code.
 
+### Order Online
+- The **Place an Order** section lets customers pick menu items with + / − buttons, see an estimated total, choose pickup or delivery and a date, and send the order.
+- You get an email titled **New Online Order – The Tepperman Table & Co.** listing every item, quantity and the estimated total. The customer gets a copy automatically.
+- Items without a set price show "Priced by email"; confirm the final total when you reply.
+- Menu items and prices for this section are in `OO_MENU` near the bottom of `index.html`. Keep them in sync with the menu.
+
 ### How requests work
 - The customer clicks **Send Request**, ticks FormSubmit's "I'm not a robot" check, and lands back on your site with a thank-you message.
 - You get an email titled **New Special Request – The Tepperman Table & Co.** with all their details. Hit **Reply** to answer them.

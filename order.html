@@ -150,6 +150,7 @@
         <div class="totals">
           <div><span>Subtotal</span><span id="t-sub">$0.00</span></div>
           <div id="fee-row" hidden><span>Delivery fee</span><span><input id="o-fee" type="number" min="0" step="0.01" value="0" style="width:96px;display:inline-block;margin:0;padding:5px 7px;text-align:right"></span></div>
+          <div><span><label style="display:inline-flex;align-items:center;gap:8px;margin:0;font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:400"><input id="o-taxon" type="checkbox" checked style="width:auto;margin:0"> Sales tax <input id="o-taxrate" type="number" min="0" max="20" step="0.01" value="8.25" style="width:68px;display:inline-block;margin:0;padding:4px 6px;text-align:right">%</label></span><span id="t-tax">$0.00</span></div>
           <div class="grand"><span>Total</span><span id="t-total">$0.00</span></div>
           <div><span>Deposit paid</span><span><input id="o-paid" type="number" min="0" step="0.01" value="0" style="width:96px;display:inline-block;margin:0;padding:5px 7px;text-align:right"></span></div>
           <div class="due"><span>Balance due</span><span id="t-due">$0.00</span></div>
@@ -250,7 +251,11 @@
     const delivery = $('o-method').value === 'Delivery';
     $('fee-row').hidden = !delivery; $('addr-wrap').hidden = !delivery;
     const fee = delivery ? num($('o-fee').value) : 0;
-    const total = sub + fee, paid = num($('o-paid').value), due = Math.max(0, total - paid);
+    const taxRate = $('o-taxon').checked ? num($('o-taxrate').value) / 100 : 0;
+    $('o-taxrate').disabled = !$('o-taxon').checked;
+    const tax = Math.round((sub + fee) * taxRate * 100) / 100;
+    $('t-tax').textContent = money(tax);
+    const total = sub + fee + tax, paid = num($('o-paid').value), due = Math.max(0, total - paid);
     $('t-sub').textContent = money(sub); $('t-total').textContent = money(total); $('t-due').textContent = money(due);
 
     const name = $('c-name').value.trim(), first = name.split(/\s+/)[0] || 'there';
@@ -264,6 +269,7 @@
     lines.push('────────────────────────');
     lines.push(`Subtotal: ${money(sub)}`);
     if (delivery && fee) lines.push(`Delivery fee: ${money(fee)}`);
+    if (taxRate) lines.push(`Sales tax (${+(taxRate * 100).toFixed(3)}%): ${money(tax)}`);
     lines.push(`TOTAL: ${money(total)}`);
     if (paid) { lines.push(`Deposit paid: ${money(paid)}`); lines.push(`Balance due: ${money(due)}`); }
     lines.push('');
@@ -281,10 +287,11 @@
   }
 
   // ---- draft autosave (this browser only)
-  const fields = ['c-name','c-email','c-phone','o-num','o-method','o-date','o-time','o-addr','o-fee','o-paid','o-notes','o-msg'];
+  const fields = ['c-name','c-email','c-phone','o-num','o-method','o-date','o-time','o-addr','o-fee','o-paid','o-taxrate','o-notes','o-msg'];
   function save() {
     try {
       const d = Object.fromEntries(fields.map(f => [f, $(f).value]));
+      d.taxon = $('o-taxon').checked;
       d.items = rows().map(r => ({ item: r.name, price: r.rawPrice, qty: r.tr.querySelector('.i-qty').value }));
       localStorage.setItem(KEY, JSON.stringify(d));
     } catch (_) {}
@@ -295,7 +302,7 @@
   }
   function reset() {
     fields.forEach(f => $(f).value = '');
-    $('o-method').value = 'Pickup'; $('o-fee').value = 0; $('o-paid').value = 0;
+    $('o-method').value = 'Pickup'; $('o-fee').value = 0; $('o-paid').value = 0; $('o-taxrate').value = '8.25'; $('o-taxon').checked = true;
     $('o-num').value = newNumber(); $('o-msg').value = DEFAULT_MSG;
     $('items').innerHTML = ''; addRow();
     $('msg').textContent = '';
@@ -307,6 +314,7 @@
     try { d = JSON.parse(localStorage.getItem(KEY)); } catch (_) {}
     if (!d) return reset();
     fields.forEach(f => { if (d[f] != null) $(f).value = d[f]; });
+    if (d.taxon != null) $('o-taxon').checked = d.taxon;
     $('items').innerHTML = '';
     (d.items && d.items.length ? d.items : [{}]).forEach(addRow);
     build();
