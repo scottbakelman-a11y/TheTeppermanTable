@@ -262,11 +262,14 @@
         <a class="btn" href="#request">Submit a Special Request</a>
       </div>
 
-      <!-- SPECIAL REQUEST FORM: saves to Supabase (keys live in config.js) -->
+      <!-- SPECIAL REQUEST FORM: emailed to the bakery via FormSubmit (formsubmit.co).
+           After confirming the first test email, you can replace the address in FORM_ENDPOINT (near the bottom) with the random code FormSubmit gives you. -->
       <form class="req" id="request" novalidate>
         <h3>Submit a Special Request</h3>
         <p class="sub">Tell us what you'd like and when you need it. We'll email you back to confirm details and pricing.</p>
-        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_subject" value="New Special Request – The Tepperman Table &amp; Co.">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row">
           <label>Your Name<input type="text" name="name" required autocomplete="name"></label>
           <label>Email<input type="email" name="email" required autocomplete="email"></label>
@@ -323,13 +326,13 @@
   </div>
 </footer>
 
-<script src="config.js"></script>
 <script>
   const btn=document.querySelector('.menu-btn'),links=document.getElementById('nav-links');
   btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
   links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');btn.setAttribute('aria-expanded',false)}));
   document.getElementById('yr').textContent=new Date().getFullYear();
-  // special request form -> Supabase
+  // special request form -> email (FormSubmit)
+  const FORM_ENDPOINT='https://formsubmit.co/ajax/TeppermanCO.99@outlook.com';
   const rq=document.getElementById('request');
   if(rq){
     const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
@@ -339,17 +342,14 @@
       const st=rq.querySelector('.status'),b=rq.querySelector('button');
       if(!rq.checkValidity()){rq.reportValidity();return}
       const f=new FormData(rq);
-      if(f.get('website')){return} // spam bot filled the hidden field
-      const cfg=window.TEPPERMAN_CONFIG||{};
-      if(!cfg.SUPABASE_URL||cfg.SUPABASE_URL.startsWith('PASTE')){st.className='status err';st.textContent='The request form isn\'t connected yet. Please email Hello@TeppermanTable.com for now.';return}
-      const order={};
-      ['name','email','phone','category','date_needed','quantity','details'].forEach(k=>{const v=(f.get(k)||'').toString().trim();if(v)order[k]=v});
+      if(f.get('_honey')){return} // spam bot filled the hidden field
+      f.delete('_honey');
+      f.set('_replyto',f.get('email'));
       b.disabled=true;b.textContent='Sending…';st.className='status';st.textContent='';
       try{
-        const r=await fetch(cfg.SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/orders',{method:'POST',
-          headers:{'Content-Type':'application/json',apikey:cfg.SUPABASE_ANON_KEY,Authorization:'Bearer '+cfg.SUPABASE_ANON_KEY,Prefer:'return=minimal'},
-          body:JSON.stringify(order)});
-        if(!r.ok)throw new Error(r.status);
+        const r=await fetch(FORM_ENDPOINT,{method:'POST',body:f,headers:{Accept:'application/json'}});
+        const j=await r.json().catch(()=>({}));
+        if(!r.ok||j.success===false||j.success==='false')throw new Error(j.message||r.status);
         rq.innerHTML='<div class="done"><h3>Thank you!</h3><p>Your request is in. We\'ll email you within a day or two to confirm details and pricing.</p></div>';
         rq.scrollIntoView({behavior:'smooth',block:'center'});
       }catch(_){

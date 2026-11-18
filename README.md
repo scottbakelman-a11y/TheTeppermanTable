@@ -1,12 +1,9 @@
 # The Tepperman Table & Co. — Website
 
-A bakery site (plain HTML/CSS, no build step), hosted on GitHub Pages, with a Special Request form and a private admin page backed by Supabase (free).
+A single-page bakery site (plain HTML/CSS, no build step), hosted on GitHub Pages. The Special Request form emails each request to TeppermanCO.99@outlook.com using FormSubmit (free, no account).
 
 ## Files
-- `index.html` — the public site, including the Special Request form
-- `admin.html` — private admin page: sign in to see and manage requests
-- `config.js` — your Supabase connection (paste 2 values, see step 4)
-- `supabase-setup.sql` — creates the orders database and its security rules (run once in Supabase)
+- `index.html` — the whole site, including the Special Request form
 - `logo.jpg`, `favicon.png`, `apple-touch-icon.png` — logo and icons
 - `CNAME` — tells GitHub Pages your custom domain
 
@@ -16,7 +13,7 @@ A bakery site (plain HTML/CSS, no build step), hosted on GitHub Pages, with a Sp
 
 ## 1. Put it on GitHub
 1. Create a new repository (e.g. `tepperman-site`), public.
-2. Upload everything in this folder to the repo root (`index.html`, `admin.html` and `config.js` must be at the top level). `supabase-setup.sql` and this README contain nothing secret, so uploading them is fine.
+2. Upload everything in this folder to the repo root (`index.html` must be at the top level).
 
 ## 2. Turn on GitHub Pages
 Repo → **Settings → Pages** → Source: **Deploy from a branch** → Branch: `main`, folder `/ (root)` → Save.
@@ -32,22 +29,14 @@ Repo → **Settings → Pages** → Source: **Deploy from a branch** → Branch:
 
 Note: leave the MX (email) records in Wix untouched if you use email on this domain.
 
-## 4. Set up the order database (Supabase, free)
-1. Sign up at **supabase.com** and create a **New project** (any name, e.g. `tepperman`; save the database password somewhere safe).
-2. When it's ready, open **SQL Editor → New query**, paste in all of `supabase-setup.sql`, and click **Run**.
-3. **Create your admin login:** **Authentication → Users → Add user → Create new user**.
-   Email: `TeppermanCO.99@outlook.com`, choose a password, tick **Auto Confirm User**.
-4. **Turn off public sign-ups:** in **Authentication** settings, turn off **Allow new users to sign up**.
-5. **Let password-reset links come back to your site:** **Authentication → URL Configuration** → set **Site URL** to `https://www.theteppermantableandco.com` and add `https://www.theteppermantableandco.com/admin.html` under **Redirect URLs**.
-6. **Copy your keys:** **Project Settings → API** (or the **Connect** button). Copy the **Project URL** and the **anon / publishable** key into `config.js`. Never put the `service_role` / secret key on the site.
-7. Upload the updated `config.js` to GitHub.
+## 4. Turn on the Special Request emails (one time)
+1. On the live site, fill in **Submit a Special Request** yourself and send it.
+   The first time, the page will say something went wrong. That's expected: the form isn't activated yet.
+2. Check the TeppermanCO.99@outlook.com inbox (and **Junk**) for an email from **FormSubmit** and click **Activate Form**.
+3. Send one more test request. It should now arrive in your inbox, and customers will see a thank-you message.
+4. Optional, to hide your Outlook address from the page code: FormSubmit's activation email includes a random code. In `index.html`, find `FORM_ENDPOINT` near the bottom and replace `TeppermanCO.99@outlook.com` with that code.
 
 ### Using it
-- Customers fill in **Submit a Special Request** on the site; it lands as **Pending**.
-- Go to `https://www.theteppermantableandco.com/admin.html`, sign in, and you'll see Pending requests first, sorted by the date they're needed.
-- Change a request's status (Pending → Confirmed → Done, or Cancelled) and keep private notes (price quoted, paid, pickup time).
-- Click a customer's email to reply.
-- To add another admin: create their user as in step 3, then run in the SQL Editor:
-  `insert into public.admins (email) values ('their@email.com');` (use all lowercase)
-
-The site doesn't email you when a new request comes in; check the admin page.
+- Each request arrives as an email titled **New Special Request – The Tepperman Table & Co.**, with the customer's name, email, phone, order type, date needed, quantity and details.
+- Hit **Reply** to answer the customer directly.
+- Tip: make an Outlook folder or rule for that subject line so requests are easy to track.
